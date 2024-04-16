@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sp</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="../css/style2.css   ">
+    <link rel="stylesheet" href="../img/themify-icons/themify-icons.css">
+
+
+    <script>
+        // Dữ liệu của 3 sản phẩm
+        const products = [
+            // 0 đồ bộ bé trai
+            {
+                name: "Set đồ sọc ngang xanh lá có túi & quần kaki ngắn",
+                image: "../img/quanaobetrai-dobo-1.png",
+                price: 250.000
+            },
+            // 1
+            {
+                name: "Set đồ họa tiết xe hơi khủng long dễ thương",
+                image: "../img/quanaobetrai-dobo-2.png",
+                price: 180.000
+            },
+            // 2
+            {
+                name: "Set đồ mùa hè gồm áo thun cotton in hình gấu trúc & quần ngắn",
+                image: "../img/quanaobetrai-dobo-3.png",
+                price: 200.000
+            },
+            // 3
+            {
+                name: "Set bộ áo thun cổ tròn tay ngán sọc & quần jean",
+                image: "../img/quanaobetrai-dobo-4.jpg",
+                price: 200.000
+            },
+            // 4 áo khoác bé trai
+            {
+                name: "Áo khoác in hình động vật phong cách bóng chày",
+                image: "../img/quanaobetrai-aokhoac-1.jpg",
+                price: 189.000
+            },
+            // 5  
+            {
+                name: "Áo khoác thêu chữ A phong cách bóng chày",
+                image: "../img/quanaobetrai-aokhoac-2.jpg",
+                price: 180.000
+            },
+            // 6
+            {
+                name: "Áo khoác bóng chày khóa kéo không mũ trùm",
+                image: "../img/quanaobetrai-aokhoac-3.jpg",
+                price: 200.000
+            },
+            // 7
+            {
+                name: "Áo khoác thêu chữ L phong cách bóng chày",
+                image: "../img/quanaobetrai-aokhoac-4.jpg",
+                price: 170.000
+            },
+            // 8 váy bé gái
+            {
+                name: "Đầm cổ polo tay dài phối dây cột thời trang xinh xắn",
+                image: "../img/quanaobegai-vay-1.jpg",
+                price: 168.000
+            },
+            // 9
+            {
+                name: "Đầm vải gạc thêu hoa thời trang mùa hè mới",
+                image: "../img/quanaobegai-vay-2.jpg",
+                price: 150.000
+            },
+            // 10
+            {
+                name: "Đầm sườn xám tay ngắn phong cách Trung Hoa cổ điển thời trang",
+                image: "../img/quanaobegai-vay-3.jpg",
+                price: 145.000
+            },
+            // 11
+            {
+                name: "Váy Hàn Quốc thời trang công chúa trẻ em",
+                image: "../img/quanaobegai-vay-4.jpg",
+                price: 170.000
+            },
+            // 12 đồ bộ bé gái
+            {
+                name: "Bộ cotton cộc tay Juice in họa tiết quả chanh",
+                image: "../img/quanaobegai-dobo-1.jpg",
+                price: 120.000
+            },
+            // 13
+            {
+                name: "Bộ quần áo mùa hè loang màu đẹp rực rỡ",
+                image: "../img/quanaobegai-dobo-2.jpg",
+                price: 150.000
+            },
+            // 14
+            {
+                name: "Bộ đồ mùa hè phong cách áo vest sọc Hàn Quốc & quần ống rộng",
+                image: "../img/quanaobegai-dobo-3.jpg",
+                price: 270.000
+            },
+            // 15
+            {
+                name: "Bộ quần áo cộc tay mùa hè essen chất vải cotton mềm mịn",
+                image: "../img/quanaobegai-dobo-4.jpg",
+                price: 100.000
+            },
+            //16 đồ sơ sinh
+            {
+                name: "Bộ áo liền quần tay dà chi tiết cà rốt dễ thương cho trẻ 0-6 tháng",
+                image: "../img/quanaotresosinh-1.jpg",
+                price: 180.000
+            },
+            {
+                name: "Body dài tay cotton cho bé sơ sinh chi tiết động vật dễ thương",
+                image: "../img/quanaotresosinh-2.jpg",
+                price: 198.000
+            },
+            {
+                name: "Body dài tay cotton hoạt hình gấu nâu cho bé",
+                image: "../img/quanaotresosinh-3.jpg",
+                price: 200.000
+            },
+            {
+                name: "Body dài tay thun cotton thoáng mát cho trẻ sơ sinh",
+                image: "../img/quanaotresosinh-4.jpg",
+                price: 225.000
+            }
+        ];
+
+        // Lấy tham số sản phẩm từ URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get('product')) || 0;
+
+        // Hiển thị thông tin sản phẩm tương ứng
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gọi hàm displayProduct tại đây
+                 displayProduct(products[productId]);
+            });
+
+        // Hàm hiển thị thông tin sản phẩm
+        function displayProduct(product) {
+            document.getElementById('productName').innerText = product.name;
+            document.getElementById('productImage').src = product.image;
+            document.getElementById('productPrice').innerText = `Giá: ${product.price.toFixed(3)}đ`;
+        }
+
+
+        // Khởi tạo biến số lượng sản phẩm
+          let quantity = 1;
+
+        // Hàm giảm số lượng sản phẩm
+        function decreaseQuantity() {
+            if (quantity > 1) {
+                quantity--;
+                updateQuantityDisplay();
+            }
+        }
+
+        // Hàm tăng số lượng sản phẩm
+        function increaseQuantity() {
+            quantity++;
+            updateQuantityDisplay();
+        }
+
+        // Hàm cập nhật hiển thị số lượng sản phẩm
+        function updateQuantityDisplay() {
+            document.getElementById('productQuantity').innerText = quantity;
+        }
+
+
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- header -->
+        <!-- contain để menu và header kh bị trôi, nhưng slider sẽ chiếm chỗ và đang không biết cách fix -->
+        <div class="contain">
+        <div class="header">
+            <div class="header-top">
+                <!-- header left -->
+                <div class="header-left">
+                    <a href="../html/home.html"><img src="../img/logo1.png" alt="" width="100%" height="100%"></a>
+                </div>
+                <!-- header center -->
+                <div class="header-center">
+                    <form action="">
+                        <input type="text" name="inputFind" id="inputFind" placeholder="Nhập tên sản phẩm cần tìm...">
+                        <i class="ti-search"></i>
+                    </form>
+                </div>
+                <!-- header right -->
+                <div class="header-right">
+                    <a href="../html/dangnhap.html"><i class="ti-user"  ></i></a>
+                    <a href="#"><i class="ti-heart"></i></a>
+                    <a href="#"><i class="ti-shopping-cart"></i></a>
+                    <a href="../html/thanhvien.html">Thành viên</a>
+    
+                </div>
+            </div>
+           
+        </div>
+        <!-- menu -->
+        <div class="menu">
+            <!-- Begin nav -->
+            <ul class="nav">
+                <li><a href="../html/home.html">
+                    Trang chủ
+                    <i class="nav-arrow-down ti-angle-down"></i>
+                </a></li>
+                <li><a href="../html/gioithieu.html">
+                    Giới thiệu
+                    <i class="nav-arrow-down ti-angle-down"></i>
+                </a></li>
+
+                <li>
+                    <a href="#">
+                        Quần áo bé gái
+                    <i class="nav-arrow-down ti-angle-down"></i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="../html/quanaobegai-vay.html">Váy</a></li>
+                        <li ><a href="../html/quanaobegai-dobo.html">Đồ bộ</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#">
+                        Quần áo bé trai
+                    <i class="nav-arrow-down ti-angle-down"></i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="../html/quanaobetrai-dobo.html">Đồ bộ</a></li>
+                        <li ><a href="../html/quanaobetrai-aokhoac.html">Áo khoác</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                    Đồ sơ sinh
+                    <i class="nav-arrow-down ti-angle-down"></i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li ><a href="../html/sosinh-bodyaolienquan.html">Body áo liền quần</a></li>
+                    </ul>
+                </li>
+                <li><a href="">
+                    Tin tức
+                    <i class="nav-arrow-down ti-angle-down"></i>
+                </a></li>
+            </ul>
+          
+            <!-- End nav -->
+        </div>
+        </div>
+
+
+        <!-- CONTENT -->
+        <div class="content">
+            <div class="detail">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="row"><img id="productImage" src="#" alt="Hình ảnh sản phẩm" width="100%" height="100%"></div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="infor">
+                            <div class="row">
+                                <h3 id="productName">Tên sản phẩm</h3>
+                            </div>
+                            <div class="row">
+                                <p id="productPrice">Giá: $0.00</p>
+                            </div>
+                            <!-- size-->
+                           
+                            <div class="row sizechoice">
+                                <div class="col-md-4"> <div class="size">Kích thước: </div></div>
+                                <div class="col-md-2"><button class="btn">S</button></div>
+                                <div class="col-md-2"><button class="btn">M</button></div>
+                                <div class="col-md-2"><button class="btn">L</button></div>
+                                <div class="col-md-2"></div>
+                               
+                            </div>
+                            <!-- Thêm nút tăng giảm số lượng -->
+                           
+                            <div class="row quantity">
+                                <div class="col-md-4"><p>Số lượng :</p></div>
+                                <div class="col-md-3">
+                                    <div class="js-qty">
+                                        <button onclick="decreaseQuantity()">-</button>
+                                        <span id="productQuantity">1</span>
+                                        <button onclick="increaseQuantity()">+</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-5"></div>
+                                
+                                
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <p class="cart">Thêm vào giỏ hàng
+                                        <i class="ti-shopping-cart"></i>
+                                    </p>
+                                </div>
+                                <div class="col-md-5">
+                                    <p class="buy">Mua ngay</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end infor-->
+                        </div>
+                    </div>
+                </div>
+              
+
+            </div>
+        </div>
+    
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="row">
+                <!-- left -->
+                <div class="col-md-4 footer-left">
+                    <p>Về ChauChau - Thời trang trẻ em</p>
+                    <p>ChauChau chuyên bán quần áo trẻ em online với nhiều mẫu mã
+                        để quý khách lựa chọn cho bé yêu của bạn. Hãy đặt hàng online 
+                        để được hưởng nhiều ưu đãi hơn tại siêu thị mẹ và bé ChauChau!</p>
+                        <p>
+                            <i class="ti-location-pin"></i>
+                            Địa chỉ: 220 Nguyễn Văn Khối, phường 9, quận Gò Vấp , TP Hồ Chí Minh <br>
+                            Giờ mở cửa: T2 - CN: 8h30 - 17h
+                        </p>
+                        <p>
+                            <i class="ti-headphone-alt"></i>
+                            0766 844 885
+                        </p>
+                        <p>
+                            <i class="ti-email"></i>
+                            Email: cskh@chauchau.vn
+                        </p>
+                </div>
+                
+                <!-- center -->
+                <div class="col-md-3 footer-center">
+                    <p>Hỗ trợ khách hàng</p>
+                    <ul class="nav">
+                        <li><a href="#">Chính sách đổi trả hàng online</a></li>
+                        <li><a href="#">Chính sách khách hàng thân thiết</a></li>
+                        <li><a href="#">Giao hàng & phí giao hàng</a></li>
+                        <li><a href="#">Hướng dẫn chọn size</a></li>
+                        <li><a href="#">Chính sách bảo mật thông tin</a></li>
+                    </ul>
+                </div>
+                
+                <!-- right -->
+                <div class="col-md-4 footer-right">
+                    <p>Theo dõi chúng tôi</p>
+                    <ul class="nav">
+                        <li><img src="../img/fbn_img.webp" alt=""></li>
+                        <li><img src="../img/instan_img.webp" alt=""></li>
+                    </ul>
+                    <p>Phương thức thanh toán</p>
+                    <ul class="nav">
+                        <li><img src="../img/payment_1_img.webp" alt=""></li>
+                        <li><img src="../img/payment_2_img.webp" alt=""></li>
+                        <li><img src="../img/payment_3_img.webp" alt=""></li>
+                    </ul>
+                    <p>Phương thức vận chuyển</p>
+                    <ul class="nav">
+                        <li><img src="../img/shipment_1_img.webp" alt=""></li>
+                        <li><img src="../img/shipment_2_img.webp" alt=""></li>
+                        <li><img src="../img/shipment_3_img.webp" alt=""></li>
+                        <li><img src="../img/shipment_4_img.webp" alt=""></li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
